@@ -3,9 +3,9 @@ import { RoomEnvironment } from './vendor/RoomEnvironment.js';
 
 const root = document.documentElement;
 const hero = document.querySelector('.hero');
-const stage = hero;
-const canvas = document.querySelector('.hero-canvas');
-const copy = document.querySelector('.hero-content');
+const stage = document.querySelector('.hero__stage');
+const canvas = document.querySelector('.hero__canvas');
+const copy = document.querySelector('.hero__copy');
 
 // layout empilhado (texto em cima, cena embaixo) só em tela estreita e em pé;
 // celular deitado usa o layout lado a lado, como o desktop
@@ -28,12 +28,12 @@ function hasWebGL() {
 }
 
 // Sem WebGL nada acontece aqui: o CSS já mostra a imagem estática.
-if (!mqReduce.matches && hasWebGL()) {
+if (hasWebGL()) {
   try {
     start();
   } catch (err) {
     console.error('[hero] cena 3D indisponível, usando a imagem estática', err);
-    root.classList.remove('hero-webgl');
+    root.classList.remove('webgl', 'motion');
   }
 }
 
@@ -182,7 +182,7 @@ function start() {
 
   // --------------------------------------------------------------------- state
   const state = { bars: 0, arrow: 0, ribbon: 0, turn: 0, fade: 0 }; // ligado ao scroll
-  const intro = { v: 1 };
+  const intro = { v: 1 }; // montagem ao carregar (0 → 1), independente do scroll
   // quantidade de movimento por eixo: o celular tem pouca largura, então abre mais em profundidade
   const AMP = {
     desktop: { x: 1, y: 1, z: 1, arrow: 1, ribbon: 1, turn: 0.34 },
@@ -191,7 +191,6 @@ function start() {
   let amp = AMP.desktop;
   let now = 0;
   let introPlayed = false;
-  let sceneDisabled = false;
   const maxDelay = BARS.length * 0.035;
   const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
   const axis = new THREE.Vector3();
@@ -213,7 +212,7 @@ function start() {
         const d = mesh.userData;
         const grow = Math.max(0.0001, outCubic(clamp01(iv * 1.7 - i * 0.085)));
         const t = ease(clamp01((state.bars - d.delay) / (1 - maxDelay)));
-        const float = Math.sin(now * 0.0011 + d.phase) * 0.04 * t;
+        const float = Math.sin(now * 0.0011 + d.phase) * 0.04 * t; // peças suspensas: flutuam de leve quando abertas
         mesh.scale.y = grow;
         mesh.position.set(
           d.x + (d.x - 0.15) * 0.26 * t * amp.x,
@@ -255,7 +254,7 @@ function start() {
       // em telas baixas o conjunto encolhe para nunca alcançar o botão, nem com a seta já elevada
       const floorPx = (0.5 + lookY / vh) * h;
       const room = floorPx - (copy.offsetTop + copy.offsetHeight) - 28;
-      s = Math.min(s, Math.max(0.16, room / (6.3 * (h / vh))));
+      s = Math.min(s, Math.max(0.3, room / (6.3 * (h / vh))));
     }
     rig.scale.setScalar(s);
     rig.position.x = (mobile ? 0 : vw * 0.25) - (mobile ? 0.3 : 0.4) * s;
@@ -267,11 +266,11 @@ function start() {
   let inView = true;
   let dirty = true;
 
-  const shouldAnimate = () => !sceneDisabled && inView && !document.hidden && !mqReduce.matches && state.fade < 0.995;
+  const shouldAnimate = () => inView && !document.hidden && !mqReduce.matches && state.fade < 0.995;
 
   function requestRender() {
     dirty = true;
-    if (!raf && inView && !document.hidden && !sceneDisabled) raf = requestAnimationFrame(tick);
+    if (!raf) raf = requestAnimationFrame(tick);
   }
 
   function tick(time) {
@@ -297,7 +296,7 @@ function start() {
     }
     if (dirty) {
       apply();
-      if (!sceneDisabled) renderer.render(scene, camera);
+      renderer.render(scene, camera);
       dirty = false;
     }
     // fora da tela (ou com a cena já apagada) o laço para; qualquer mudança chama requestRender()
@@ -315,12 +314,8 @@ function start() {
   new IntersectionObserver(([entry]) => {
     inView = entry.isIntersecting;
     if (inView) requestRender();
-    else { cancelAnimationFrame(raf); raf = 0; }
   }).observe(stage);
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) { cancelAnimationFrame(raf); raf = 0; }
-    else requestRender();
-  });
+  document.addEventListener('visibilitychange', requestRender);
   window.addEventListener('resize', layout);
   window.addEventListener('pointermove', (e) => {
     if (!mqPointer.matches) return;
@@ -329,17 +324,14 @@ function start() {
   }, { passive: true });
   canvas.addEventListener('webglcontextlost', (e) => {
     e.preventDefault();
-    sceneDisabled = true;
-    cancelAnimationFrame(raf);
-    raf = 0;
-    root.classList.remove('hero-webgl');
+    root.classList.remove('webgl', 'motion');
   });
 
   // -------------------------------------------------------------------- scroll
   // O progresso da timeline segue o scroll: parar de rolar para a animação, rolar para cima recompõe
   // o gráfico. `scrub: 0.3` só amacia o movimento (ele alcança a posição do scroll em 0,3 s).
   const { gsap, ScrollTrigger } = window;
-  root.classList.add('hero-webgl');
+  root.classList.add('webgl');
   staticLight();
 
   if (gsap && ScrollTrigger) {
@@ -352,17 +344,18 @@ function start() {
         const { mobile, reduce } = ctx.conditions;
         Object.assign(state, { bars: 0, arrow: 0, ribbon: 0, turn: 0, fade: 0 });
         amp = mobile ? AMP.mobile : AMP.desktop;
-        if (reduce || sceneDisabled) {
+        if (reduce) {
           // composição estática: sem entrada, sem distância extra de rolagem e sem separação das peças
-          root.classList.remove('hero-webgl');
+          root.classList.remove('motion');
           gsap.killTweensOf(intro);
           intro.v = 1;
           staticLight();
           layout();
           return undefined;
         }
-        root.classList.add('hero-webgl');
+        root.classList.add('motion');
         layout();
+
         if (!introPlayed) {
           introPlayed = true;
           intro.v = 0;
@@ -374,10 +367,8 @@ function start() {
           onUpdate: requestRender,
           scrollTrigger: {
             trigger: hero,
-            start: () => `top top+=${document.querySelector('.site-header').offsetHeight}`,
+            start: 'top top',
             end: () => `+=${Math.round(window.innerHeight * (mobile ? 0.52 : 0.6))}`,
-            pin: true,
-            pinSpacing: true,
             scrub: 0.3,
             invalidateOnRefresh: true,
           },
@@ -390,9 +381,8 @@ function start() {
           .to(state, { fade: 1, duration: 0.34, ease: 'sine.in' }, 0.66);
 
         return () => {
-          root.classList.remove('hero-webgl');
+          root.classList.remove('motion');
           gsap.set(copy, { clearProps: 'all' });
-          intro.v = 1;
           Object.assign(state, { bars: 0, arrow: 0, ribbon: 0, turn: 0, fade: 0 });
           requestRender();
         };
@@ -408,8 +398,6 @@ function start() {
     state,
     intro,
     requestRender,
-    stats() { return { active: root.classList.contains('hero-webgl'), inView, rendering: Boolean(raf), calls: renderer.info.render.calls, triangles: renderer.info.render.triangles }; },
-    visualSettings: { exposure: renderer.toneMappingExposure, environment: scene.environmentIntensity, barColor: barMat.color.getHexString(), arrowColor: goldMat.color.getHexString(), ribbonColor: ribbonGold.color.getHexString() },
     sceneRect() {
       const box = new THREE.Box3();
       main.bars.forEach((m) => box.expandByObject(m));
@@ -425,7 +413,6 @@ function start() {
       return r;
     },
   };
-  document.fonts.ready.then(() => { layout(); ScrollTrigger?.refresh(); });
 }
 
 // ---------------------------------------------------------------------- helpers

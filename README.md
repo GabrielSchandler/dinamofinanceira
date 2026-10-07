@@ -10,11 +10,11 @@ Execute `node preview.mjs` e abra o endereço impresso no terminal. A porta é e
 
 - Desktop: barras, seta e faixa em Three.js, com separação e recomposição ligadas ao scroll por GSAP ScrollTrigger. Os textos e os botões continuam em HTML.
 - Celular em orientação vertical: a mesma cena 3D, com o movimento original reduzido e posicionada abaixo dos textos.
-- Preferência por movimento reduzido, economia de dados ou falta de WebGL: imagem estática.
+- Preferência por movimento reduzido: cena estática. Sem WebGL: imagem alternativa.
 - A renderização 3D pausa quando o topo sai da tela ou a aba fica oculta.
-- A cena fica fixa durante uma passagem curta: 60% da altura da tela no desktop e 52% no celular. Ao rolar para cima, as peças se recompõem.
+- O palco usa o mesmo posicionamento sticky do protótipo: 40vh extras no desktop e 32vh no celular. A timeline mantém as distâncias originais de 60% e 52% da altura da tela. Ao rolar para cima, as peças se recompõem.
 - Materiais, iluminação, reflexos, montagem inicial e deslocamento das peças preservam os valores do protótipo original do Claude.
-- `dist/hero-scene.js` adapta o protótipo fornecido pelo usuário, originalmente feito no Claude. Geometria, luz, intensidade e transição ficam nesse arquivo.
+- `dist/hero-scene.js` copia integralmente o `main.js` original fornecido pelo usuário, sem alterações na lógica, na geometria ou na animação. A folha `dist/hero-prototype.css` isola a apresentação original do topo; mantém o fundo grafite e os textos e contatos da Dínamo.
 
 ## Atendimento
 

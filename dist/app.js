@@ -1,14 +1,5 @@
 'use strict';
-const reducedHeroMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-let heroSceneRequested = false;
-function updateHeroMotion() {
-  if (!reducedHeroMotion.matches && !navigator.connection?.saveData && !heroSceneRequested) {
-    heroSceneRequested = true;
-    import('./hero-scene.js').catch(() => document.documentElement.classList.remove('hero-webgl'));
-  }
-}
-reducedHeroMotion.addEventListener('change', updateHeroMotion);
-updateHeroMotion();
+import('./hero-scene.js').catch(() => document.documentElement.classList.remove('webgl', 'motion'));
 if (window.lucide) window.lucide.createIcons();
 const menuButton = document.querySelector('.menu-button');
 const mobileNav = document.querySelector('.mobile-nav');

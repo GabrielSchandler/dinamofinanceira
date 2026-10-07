@@ -15,6 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" href="assets/dinamo-hero.png" as="image">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="hero-prototype.css">
   <script src="assets/lucide.min.js" defer></script>
   <script src="vendor/gsap.min.js" defer></script>
   <script src="vendor/ScrollTrigger.min.js" defer></script>
@@ -26,11 +27,11 @@
   <header class="site-header" id="topo">
     <div class="container header-inner">
       <a class="brand" href="#topo" aria-label="Dínamo Consultoria Financeira, início">
-        <i data-lucide="chart-no-axes-combined" aria-hidden="true"></i>
+        <span class="brand__mark" aria-hidden="true"></span>
         <span><strong>DÍNAMO</strong><small>CONSULTORIA FINANCEIRA</small></span>
       </a>
       <nav class="desktop-nav" aria-label="Navegação principal">
-        <a href="#servicos">Soluções</a><a href="#processo">Como funciona</a><a href="#dinamo">A Dínamo</a><a href="#duvidas">Dúvidas</a>
+        <a href="#servicos">Soluções</a><a href="#analise">Contato</a>
       </nav>
       <a class="button button-outline header-contact" href="#analise">Solicitar análise</a>
       <button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav" title="Abrir menu"><i data-lucide="menu"></i></button>
@@ -40,18 +41,18 @@
     </nav>
   </header>
   <main id="principal">
-    <section class="hero" aria-labelledby="hero-title">
-      <img class="hero-photo" src="assets/dinamo-hero.png" alt="Gráfico e seta dourados da identidade Dínamo sobre fundo grafite" width="1672" height="941" fetchpriority="high">
-      <canvas class="hero-canvas" aria-hidden="true"></canvas>
-      <div class="hero-shade"></div>
-      <div class="container hero-content">
-        <p class="eyebrow light"><span class="gold-line"></span> REVISÃO DE JUROS E CONTRATOS</p>
-        <h1 id="hero-title">Revisão de juros.<br>Mais equilíbrio<br>para suas <em>parcelas.</em></h1>
+    <section class="hero hero-prototype" aria-labelledby="hero-title">
+      <div class="hero__stage">
+      <img class="hero-photo hero__fallback" src="assets/dinamo-hero.png" alt="Gráfico e seta dourados da identidade Dínamo sobre fundo grafite" width="1672" height="941" fetchpriority="high">
+      <canvas class="hero-canvas hero__canvas" aria-hidden="true"></canvas>
+      <div class="hero-content hero__copy">
+        <p class="eyebrow">REVISÃO DE JUROS E CONTRATOS</p>
+        <h1 id="hero-title">Revisão de juros. Mais equilíbrio para suas parcelas.</h1>
         <p class="hero-description">Seu financiamento merece uma segunda análise. Entenda os juros, identifique possíveis cobranças indevidas e conheça os caminhos para reduzir o peso das parcelas.</p>
-        <div class="hero-actions"><a class="button button-gold" href="#analise">Quero analisar meu contrato <i data-lucide="file-search"></i></a><a class="text-link light-link whatsapp-link" href="https://wa.me/5511970182723" target="_blank" rel="noopener noreferrer"><i data-lucide="message-circle"></i> Conversar no WhatsApp</a></div>
-        <p class="hero-caption"><i data-lucide="users-round"></i> Para você e para sua empresa.</p>
+        <div class="hero-actions"><a class="button button-gold" href="#analise">Quero analisar meu contrato</a><a class="text-link light-link whatsapp-link" href="https://wa.me/5511970182723" target="_blank" rel="noopener noreferrer">Conversar no WhatsApp</a></div>
+        <p class="hero-caption">Para você e para sua empresa.</p>
       </div>
-      <div class="hero-bottom container"><span>Clareza para decidir. Cuidado em cada etapa.</span><a href="#servicos" aria-label="Conhecer as soluções da Dínamo" title="Conhecer as soluções"><i data-lucide="chevron-down"></i></a><span class="hero-bottom-right">DÍNAMO CONSULTORIA FINANCEIRA</span></div>
+      </div>
     </section>
     <div class="service-strip"><div class="container strip-inner"><span><i data-lucide="car-front"></i> Financiamento de veículos</span><span><i data-lucide="house"></i> Financiamento de imóveis</span><span><i data-lucide="landmark"></i> Empréstimos PF e PJ</span></div></div>
     <section class="section solutions" id="servicos" aria-labelledby="solutions-title">

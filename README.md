@@ -9,10 +9,11 @@ Execute `node preview.mjs` e abra o endereço impresso no terminal. A porta é e
 ## Animação do topo
 
 - Desktop: barras, seta e faixa em Three.js, com separação e recomposição ligadas ao scroll por GSAP ScrollTrigger. Os textos e os botões continuam em HTML.
-- Telas até 850 px: vídeo local de 6 segundos, sem som. A cena 3D não é carregada.
+- Celular em orientação vertical: a mesma cena 3D, com o movimento original reduzido e posicionada abaixo dos textos.
 - Preferência por movimento reduzido, economia de dados ou falta de WebGL: imagem estática.
-- A renderização 3D e o vídeo pausam quando o topo sai da tela ou a aba fica oculta.
-- O efeito não cria telas extras de rolagem e mantém a seção seguinte visível na abertura.
+- A renderização 3D pausa quando o topo sai da tela ou a aba fica oculta.
+- A cena fica fixa durante uma passagem curta: 60% da altura da tela no desktop e 52% no celular. Ao rolar para cima, as peças se recompõem.
+- Materiais, iluminação, reflexos, montagem inicial e deslocamento das peças preservam os valores do protótipo original do Claude.
 - `dist/hero-scene.js` adapta o protótipo fornecido pelo usuário, originalmente feito no Claude. Geometria, luz, intensidade e transição ficam nesse arquivo.
 
 ## Atendimento

@@ -1,32 +1,13 @@
 'use strict';
-const heroMedia = window.matchMedia('(max-width: 850px)');
 const reducedHeroMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const heroAmbient = document.querySelector('.hero-ambient');
 let heroSceneRequested = false;
-let heroInView = true;
 function updateHeroMotion() {
-  const videoEnabled = heroMedia.matches && !reducedHeroMotion.matches && !navigator.connection?.saveData;
-  if (videoEnabled && heroInView && !document.hidden) {
-    heroAmbient.querySelectorAll('source[data-src]').forEach(source => { if (!source.src) source.src = source.dataset.src; });
-    if (heroAmbient.readyState === 0) heroAmbient.load();
-    heroAmbient.play().then(() => {
-      if (heroMedia.matches && !reducedHeroMotion.matches && heroInView && !document.hidden) document.documentElement.classList.add('hero-video-active');
-      else heroAmbient.pause();
-    }).catch(() => document.documentElement.classList.remove('hero-video-active'));
-  } else {
-    heroAmbient.pause();
-    if (!videoEnabled) document.documentElement.classList.remove('hero-video-active');
-  }
-  if (!heroMedia.matches && !reducedHeroMotion.matches && !navigator.connection?.saveData && !heroSceneRequested) {
+  if (!reducedHeroMotion.matches && !navigator.connection?.saveData && !heroSceneRequested) {
     heroSceneRequested = true;
     import('./hero-scene.js').catch(() => document.documentElement.classList.remove('hero-webgl'));
   }
 }
-heroMedia.addEventListener('change', updateHeroMotion);
 reducedHeroMotion.addEventListener('change', updateHeroMotion);
-document.addEventListener('visibilitychange', updateHeroMotion);
-heroAmbient.addEventListener('error', () => document.documentElement.classList.remove('hero-video-active'));
-new IntersectionObserver(([entry]) => { heroInView = entry.isIntersecting; updateHeroMotion(); }).observe(document.querySelector('.hero'));
 updateHeroMotion();
 if (window.lucide) window.lucide.createIcons();
 const menuButton = document.querySelector('.menu-button');

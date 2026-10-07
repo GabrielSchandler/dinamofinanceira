@@ -9,7 +9,7 @@ const copy = document.querySelector('.hero-content');
 
 // layout empilhado (texto em cima, cena embaixo) só em tela estreita e em pé;
 // celular deitado usa o layout lado a lado, como o desktop
-const MOBILE_QUERY = '(max-width: 850px)';
+const MOBILE_QUERY = '(max-width: 767px) and (orientation: portrait)';
 const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 const mqMobile = window.matchMedia(MOBILE_QUERY);
 const mqPointer = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -28,7 +28,7 @@ function hasWebGL() {
 }
 
 // Sem WebGL nada acontece aqui: o CSS já mostra a imagem estática.
-if (!mqMobile.matches && !mqReduce.matches && hasWebGL()) {
+if (!mqReduce.matches && hasWebGL()) {
   try {
     start();
   } catch (err) {
@@ -39,16 +39,16 @@ if (!mqMobile.matches && !mqReduce.matches && hasWebGL()) {
 
 function start() {
   // ------------------------------------------------------------------ renderer
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'default' });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
   renderer.setClearColor(0x000000, 0);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 0.9;
   renderer.localClippingEnabled = true; // usado para "desenhar" a seta na entrada
 
   const scene = new THREE.Scene();
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-  scene.environmentIntensity = 0.48;
+  scene.environmentIntensity = 0.36;
   pmrem.dispose();
 
   const DIST = 17;
@@ -57,10 +57,11 @@ function start() {
 
   // ----------------------------------------------------------------- materials
   const brushed = brushedTexture();
+  const glowTex = glowTexture();
   const arrowClip = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 1e4);
-  const barMat = new THREE.MeshStandardMaterial({ color: 0xa18448, metalness: 1, roughness: 0.46, roughnessMap: brushed });
-  const goldMat = new THREE.MeshStandardMaterial({ color: 0xd0ae65, metalness: 1, roughness: 0.38, roughnessMap: brushed, clippingPlanes: [arrowClip] });
-  const ribbonGold = new THREE.MeshStandardMaterial({ color: 0xc4a15a, metalness: 1, roughness: 0.4, roughnessMap: brushed, side: THREE.DoubleSide });
+  const barMat = new THREE.MeshStandardMaterial({ color: 0x55411f, metalness: 1, roughness: 0.58, roughnessMap: brushed });
+  const goldMat = new THREE.MeshStandardMaterial({ color: 0xb08a44, metalness: 1, roughness: 0.48, roughnessMap: brushed, clippingPlanes: [arrowClip] });
+  const ribbonGold = new THREE.MeshStandardMaterial({ color: 0xa8823f, metalness: 1, roughness: 0.5, roughnessMap: brushed, side: THREE.DoubleSide });
   const ribbonDark = new THREE.MeshStandardMaterial({ color: 0x100f0d, metalness: 0.7, roughness: 0.38, side: THREE.DoubleSide });
   const edgeDim = new THREE.LineBasicMaterial({ color: 0xe6c47c, transparent: true, opacity: 0.5 });
 
@@ -141,6 +142,15 @@ function start() {
   scene.add(floor);
 
   // luz quente atrás do conjunto e no piso, como o contraluz da referência
+  const glowMat = (opacity) => new THREE.MeshBasicMaterial({
+    map: glowTex, color: 0xd9a04e, transparent: true, opacity, blending: THREE.AdditiveBlending, depthWrite: false,
+  });
+  const backGlow = new THREE.Mesh(new THREE.PlaneGeometry(11, 9), glowMat(0.3));
+  backGlow.position.set(0.6, 2.6, -2.95);
+  const floorGlow = new THREE.Mesh(new THREE.PlaneGeometry(10, 6), glowMat(0.22));
+  floorGlow.rotation.x = -Math.PI / 2;
+  floorGlow.position.set(0.4, 0.01, 1.4);
+  rig.add(backGlow, floorGlow);
 
   // brilho na ponta da seta (acende quando a luz chega nela)
   const tipStar = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 1.5), new THREE.MeshBasicMaterial({
@@ -180,6 +190,7 @@ function start() {
   };
   let amp = AMP.desktop;
   let now = 0;
+  let introPlayed = false;
   let sceneDisabled = false;
   const maxDelay = BARS.length * 0.035;
   const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
@@ -202,15 +213,16 @@ function start() {
         const d = mesh.userData;
         const grow = Math.max(0.0001, outCubic(clamp01(iv * 1.7 - i * 0.085)));
         const t = ease(clamp01((state.bars - d.delay) / (1 - maxDelay)));
+        const float = Math.sin(now * 0.0011 + d.phase) * 0.04 * t;
         mesh.scale.y = grow;
         mesh.position.set(
           d.x + (d.x - 0.15) * 0.26 * t * amp.x,
-          (d.h * grow) / 2 + d.lift * t * amp.y,
+          (d.h * grow) / 2 + d.lift * t * amp.y + float,
           d.z + d.dz * t * amp.z,
         );
       });
       const ta = state.arrow * amp.arrow;
-      set.arrow.position.set(0.12 * ta, 1.0 * ta, ARROW_Z + 0.5 * ta);
+      set.arrow.position.set(0.12 * ta, 1.0 * ta + Math.sin(now * 0.0009) * 0.05 * state.arrow, ARROW_Z + 0.5 * ta);
       set.arrow.rotation.z = 0.04 * ta;
       const tr = ease(state.ribbon) * amp.ribbon;
       set.ribbons.forEach((mesh, j) => {
@@ -243,7 +255,7 @@ function start() {
       // em telas baixas o conjunto encolhe para nunca alcançar o botão, nem com a seta já elevada
       const floorPx = (0.5 + lookY / vh) * h;
       const room = floorPx - (copy.offsetTop + copy.offsetHeight) - 28;
-      s = Math.min(s, Math.max(0.3, room / (6.3 * (h / vh))));
+      s = Math.min(s, Math.max(0.16, room / (6.3 * (h / vh))));
     }
     rig.scale.setScalar(s);
     rig.position.x = (mobile ? 0 : vw * 0.25) - (mobile ? 0.3 : 0.4) * s;
@@ -255,7 +267,7 @@ function start() {
   let inView = true;
   let dirty = true;
 
-  const shouldAnimate = () => !sceneDisabled && inView && !document.hidden && !mqMobile.matches && !mqReduce.matches && state.fade < 0.995;
+  const shouldAnimate = () => !sceneDisabled && inView && !document.hidden && !mqReduce.matches && state.fade < 0.995;
 
   function requestRender() {
     dirty = true;
@@ -271,13 +283,14 @@ function start() {
       const env = Math.sin(Math.PI * u) ** 2;
       const sx = -5.5 + 11.5 * u;
       sweep.position.set(sx, 1.2 + 4.2 * u, 5.5);
-      sweep.intensity = 32 * env;
+      sweep.intensity = 52 * env;
       // as arestas de cada barra acendem quando a luz passa por ela
       main.bars.forEach((mesh) => {
         const d = mesh.userData;
         d.edge.opacity = 0.4 + 0.6 * env * Math.exp(-(((d.x - sx) / 1.5) ** 2));
       });
-      tipStar.material.opacity = intro.v >= 1 ? 0.16 * Math.exp(-(((u - 0.74) / 0.07) ** 2)) : 0;
+      tipStar.material.opacity = intro.v >= 1 ? 0.75 * Math.exp(-(((u - 0.74) / 0.07) ** 2)) : 0;
+      backGlow.material.opacity = 0.27 + 0.07 * Math.sin(time * 0.0009);
       pointer.x += (pointer.tx - pointer.x) * 0.06;
       pointer.y += (pointer.ty - pointer.y) * 0.06;
       dirty = true;
@@ -334,12 +347,12 @@ function start() {
     ScrollTrigger.config({ ignoreMobileResize: true }); // a barra de endereço do celular não recalcula tudo
     const mm = gsap.matchMedia();
     mm.add(
-      { wide: '(min-width: 851px)', mobile: MOBILE_QUERY, reduce: '(prefers-reduced-motion: reduce)' },
+      { wide: '(min-width: 768px), (orientation: landscape)', mobile: MOBILE_QUERY, reduce: '(prefers-reduced-motion: reduce)' },
       (ctx) => {
         const { mobile, reduce } = ctx.conditions;
         Object.assign(state, { bars: 0, arrow: 0, ribbon: 0, turn: 0, fade: 0 });
         amp = mobile ? AMP.mobile : AMP.desktop;
-        if (reduce || mobile || sceneDisabled) {
+        if (reduce || sceneDisabled) {
           // composição estática: sem entrada, sem distância extra de rolagem e sem separação das peças
           root.classList.remove('hero-webgl');
           gsap.killTweensOf(intro);
@@ -350,6 +363,11 @@ function start() {
         }
         root.classList.add('hero-webgl');
         layout();
+        if (!introPlayed) {
+          introPlayed = true;
+          intro.v = 0;
+          gsap.to(intro, { v: 1, duration: 2.1, delay: 0.15, ease: 'none', onUpdate: requestRender });
+        }
 
         const tl = gsap.timeline({
           defaults: { ease: 'none' },
@@ -357,8 +375,10 @@ function start() {
           scrollTrigger: {
             trigger: hero,
             start: () => `top top+=${document.querySelector('.site-header').offsetHeight}`,
-            end: () => `+=${Math.round(window.innerHeight * 0.55)}`,
-            scrub: 0.2,
+            end: () => `+=${Math.round(window.innerHeight * (mobile ? 0.52 : 0.6))}`,
+            pin: true,
+            pinSpacing: true,
+            scrub: 0.3,
             invalidateOnRefresh: true,
           },
         });
@@ -366,10 +386,13 @@ function start() {
           .to(state, { turn: 1, duration: 1 }, 0)
           .to(state, { arrow: 1, duration: 0.72, ease: 'sine.inOut' }, 0.06)
           .to(state, { ribbon: 1, duration: 0.62 }, 0.16)
-          .to(state, { fade: 1, duration: 0.24, ease: 'sine.in' }, 0.76);
+          .to(copy, { autoAlpha: 0, y: -18, duration: 0.24 }, 0.6)
+          .to(state, { fade: 1, duration: 0.34, ease: 'sine.in' }, 0.66);
 
         return () => {
           root.classList.remove('hero-webgl');
+          gsap.set(copy, { clearProps: 'all' });
+          intro.v = 1;
           Object.assign(state, { bars: 0, arrow: 0, ribbon: 0, turn: 0, fade: 0 });
           requestRender();
         };
@@ -386,6 +409,7 @@ function start() {
     intro,
     requestRender,
     stats() { return { active: root.classList.contains('hero-webgl'), inView, rendering: Boolean(raf), calls: renderer.info.render.calls, triangles: renderer.info.render.triangles }; },
+    visualSettings: { exposure: renderer.toneMappingExposure, environment: scene.environmentIntensity, barColor: barMat.color.getHexString(), arrowColor: goldMat.color.getHexString(), ribbonColor: ribbonGold.color.getHexString() },
     sceneRect() {
       const box = new THREE.Box3();
       main.bars.forEach((m) => box.expandByObject(m));
@@ -401,6 +425,7 @@ function start() {
       return r;
     },
   };
+  document.fonts.ready.then(() => { layout(); ScrollTrigger?.refresh(); });
 }
 
 // ---------------------------------------------------------------------- helpers

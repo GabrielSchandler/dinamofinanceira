@@ -7,7 +7,8 @@ function closeMenu() { mobileNav.hidden = true; menuButton.setAttribute('aria-ex
 menuButton.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') !== 'true'; mobileNav.hidden = !open; menuButton.setAttribute('aria-expanded', String(open)); menuButton.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu'); document.body.classList.toggle('menu-open', open); });
 mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
-window.addEventListener('resize', () => { if (window.innerWidth > 850) closeMenu(); });
+window.addEventListener('resize', () => { if (window.innerWidth > 1100) closeMenu(); });
+document.addEventListener('click', event => { if (!document.querySelector('.site-header').contains(event.target)) closeMenu(); });
 
 const whatsappNumber = '5511970182723';
 const whatsappUrl = text => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;

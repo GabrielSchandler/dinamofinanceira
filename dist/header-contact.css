@@ -1,0 +1,63 @@
+.site-header{z-index:40}
+.site-header .header-inner{min-height:104px;padding-top:18px;padding-bottom:18px;gap:24px}
+.site-header .brand{gap:10px}
+.site-header .brand-symbol{width:78px;height:58px;object-fit:contain;flex-shrink:0}
+.site-header .brand strong{font-size:27px;color:#eed49b}
+.site-header .brand small{font-size:9px;color:#e3c581;letter-spacing:0}
+.site-header .desktop-nav{margin-left:auto;gap:24px;font-size:14px;color:#f1e9dc}
+.site-header .desktop-nav a{padding:10px 0;border-bottom:1px solid transparent}
+.site-header .desktop-nav a:hover,.site-header .desktop-nav a.is-active{color:#eed49b;border-bottom-color:#eed49b}
+.site-header .header-contact{display:inline-flex;min-height:48px;padding:12px 18px;font-size:14px;white-space:nowrap}
+.site-header .menu-button,.site-header .mobile-nav{display:none}
+.whatsapp-cta,.hero-prototype .button.whatsapp-cta,.process-bottom .whatsapp-link,.about-copy .whatsapp-link,.faq-intro .whatsapp-link{
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:56px;max-width:100%;padding:15px 22px;
+  border:1px solid #50b983;border-radius:5px;background:#10713d;color:#fff;font-size:16px;font-weight:700;line-height:1.5;letter-spacing:0;
+  box-shadow:0 8px 24px #08753b36;transition:background .2s ease,box-shadow .2s ease,transform .2s ease;text-align:center;
+}
+.whatsapp-cta:hover,.hero-prototype .button.whatsapp-cta:hover,.process-bottom .whatsapp-link:hover,.about-copy .whatsapp-link:hover,.faq-intro .whatsapp-link:hover{
+  background:#0b5c31;color:#fff;box-shadow:0 10px 28px #08753b50;transform:translateY(-2px);filter:none;
+}
+.whatsapp-cta svg{width:22px;height:22px;flex-shrink:0;stroke:#fff}
+.whatsapp-cta>span{min-width:0}
+.hero-prototype .hero-actions{gap:18px 24px}
+.hero-prototype .hero-actions .text-link{border-bottom:1px solid #d8b46a;padding-bottom:4px;font-weight:600}
+.hero-prototype .hero-description{color:#d3cabe}
+.process-bottom .whatsapp-link svg,.about-copy .whatsapp-link svg,.faq-intro .whatsapp-link svg{stroke:#fff}
+.contact-phone{display:inline-flex;align-items:center;justify-content:center;max-width:100%;padding:14px 20px;border:1px solid #50b983;border-radius:5px;background:#10713d;color:#fff;box-shadow:0 8px 24px #08753b36}
+.contact-phone:hover{background:#0b5c31;color:#fff}
+.analysis-form .whatsapp-cta{width:100%;flex-wrap:nowrap}
+.analysis-form .whatsapp-cta>span{flex:1}
+.floating-whatsapp{width:60px;height:60px;background:#10713d;border:1px solid #50b983;box-shadow:0 8px 26px #08753b50}
+@media(max-width:1100px){
+  .site-header .desktop-nav,.site-header .header-contact{display:none}
+  .site-header .header-inner{min-height:88px;padding-top:12px;padding-bottom:12px}
+  .site-header .menu-button{display:inline-flex;position:relative;width:44px;height:44px;flex-shrink:0;background:#111b16e6;border:1px solid #b79b5b80;border-radius:4px;color:#eed49b}
+  .site-header .menu-button .menu-close{display:none}
+  .menu-open .site-header .menu-icon{display:none}
+  .menu-open .site-header .menu-close{display:block}
+  .site-header .mobile-nav{display:flex;position:absolute;inset:100% 0 auto;flex-direction:column;gap:0;padding:12px var(--prototype-gutter) 24px;background:#111b16;border-top:1px solid #e4c88633;box-shadow:0 18px 30px #0006;max-height:calc(100svh - 88px);overflow-y:auto;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  .site-header .mobile-nav[hidden]{display:none}
+  .site-header .mobile-nav>a{padding:13px 0;color:#f1e9dc;font-size:16px;border-bottom:1px solid #ffffff15}
+  .site-header .mobile-nav>a.whatsapp-cta{padding:15px 18px;margin-top:18px;border:1px solid #50b983;color:#fff}
+}
+@media(max-width:767px) and (orientation:portrait){
+  .site-header .header-inner{min-height:82px;padding:10px var(--prototype-gutter);gap:12px}
+  .site-header .brand-symbol{width:64px;height:50px}
+  .site-header .brand strong{font-size:25px}
+  .site-header .brand small{display:block;font-size:8px}
+  .hero-prototype .hero__copy{padding-top:104px}
+  .hero-prototype .hero-actions{gap:16px;width:100%}
+  .hero-prototype .button.whatsapp-cta{width:100%;min-height:56px;padding:15px 18px;font-size:16px;justify-content:space-between}
+  .hero-prototype .hero-actions .text-link{font-size:14px}
+  .hero-prototype .hero-caption{font-size:13px}
+  .faq-intro .whatsapp-link,.about-copy .whatsapp-link,.process-bottom .whatsapp-link{font-size:14px;padding:14px 18px}
+  .analysis-form .whatsapp-cta{font-size:14px;padding:14px 16px;gap:10px}
+}
+@media(max-height:480px){
+  .site-header .header-inner{min-height:64px;padding-top:6px;padding-bottom:6px}
+  .site-header .brand-symbol{height:42px;width:56px}
+  .site-header .brand strong{font-size:22px}
+  .hero-prototype .button.whatsapp-cta{min-height:46px;padding:10px 16px;font-size:14px}
+  .site-header .mobile-nav{max-height:calc(100svh - 64px)}
+}
+@media(prefers-reduced-motion:reduce){.whatsapp-cta,.contact-phone{transition:none}}

@@ -16,6 +16,7 @@
   <link rel="preload" href="assets/dinamo-hero.png" as="image">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="hero-prototype.css">
+  <link rel="stylesheet" href="header-contact.css">
   <script src="assets/lucide.min.js" defer></script>
   <script src="vendor/gsap.min.js" defer></script>
   <script src="vendor/ScrollTrigger.min.js" defer></script>
@@ -27,17 +28,17 @@
   <header class="site-header" id="topo">
     <div class="container header-inner">
       <a class="brand" href="#topo" aria-label="Dínamo Consultoria Financeira, início">
-        <span class="brand__mark" aria-hidden="true"></span>
+        <img class="brand-symbol" src="assets/dinamo-symbol.png" alt="" width="1536" height="1024">
         <span><strong>DÍNAMO</strong><small>CONSULTORIA FINANCEIRA</small></span>
       </a>
       <nav class="desktop-nav" aria-label="Navegação principal">
-        <a href="#servicos">Soluções</a><a class="whatsapp-link" href="https://wa.me/5511970182723" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="#servicos">Soluções</a><a href="#processo">Como funciona</a><a href="#dinamo">A Dínamo</a><a href="#duvidas">Dúvidas</a>
       </nav>
-      <a class="button button-outline header-contact" href="#analise">Solicitar análise</a>
-      <button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav" title="Abrir menu"><i data-lucide="menu"></i></button>
+      <a class="button whatsapp-cta whatsapp-link header-contact" href="https://wa.me/5511970182723" target="_blank" rel="noopener noreferrer"><i data-lucide="message-circle" aria-hidden="true"></i><span>Falar no WhatsApp</span></a>
+      <button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav" title="Abrir menu"><i class="menu-icon" data-lucide="menu" aria-hidden="true"></i><i class="menu-close" data-lucide="x" aria-hidden="true"></i></button>
     </div>
     <nav class="mobile-nav" id="mobile-nav" aria-label="Navegação no celular" hidden>
-      <a href="#servicos">Soluções</a><a href="#processo">Como funciona</a><a href="#dinamo">A Dínamo</a><a href="#duvidas">Dúvidas</a><a href="#analise">Solicitar análise</a>
+      <a href="#servicos">Soluções</a><a href="#processo">Como funciona</a><a href="#dinamo">A Dínamo</a><a href="#duvidas">Dúvidas</a><a href="#analise">Solicitar análise</a><a class="whatsapp-cta whatsapp-link" href="https://wa.me/5511970182723" target="_blank" rel="noopener noreferrer"><i data-lucide="message-circle" aria-hidden="true"></i><span>Falar no WhatsApp</span><i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
     </nav>
   </header>
   <main id="principal">
@@ -48,8 +49,8 @@
       <div class="hero-content hero__copy">
         <p class="eyebrow">AS PARCELAS ESTÃO PESANDO?</p>
         <h1 id="hero-title">Revisão de juros. Descubra se você pode pagar menos.</h1>
-        <p class="hero-description">Juros, tarifas e seguros podem estar aumentando o custo do seu contrato. Converse com a Dínamo e avalie possibilidades de reduzir suas parcelas ou recuperar cobranças indevidas.</p>
-        <div class="hero-actions"><a class="button button-gold whatsapp-link" href="https://wa.me/5511970182723" target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a><a class="text-link light-link" href="#analise">Solicitar análise</a></div>
+        <p class="hero-description">Juros, tarifas e seguros podem estar aumentando o custo do seu contrato. Converse com a Dínamo e descubra, com a análise do seu caso, quanto suas parcelas podem diminuir e se há cobranças indevidas a recuperar.</p>
+        <div class="hero-actions"><a class="button whatsapp-cta whatsapp-link" href="https://wa.me/5511970182723" target="_blank" rel="noopener noreferrer"><i data-lucide="message-circle" aria-hidden="true"></i><span>Falar no WhatsApp</span><i data-lucide="arrow-up-right" aria-hidden="true"></i></a><a class="text-link light-link" href="#analise">Solicitar análise</a></div>
         <p class="hero-caption">Veículos, imóveis e empréstimos. PF e PJ.</p>
       </div>
       </div>
@@ -90,7 +91,7 @@
         <div class="form-row"><div class="field"><label for="parcela">Valor da parcela <small>(opcional)</small></label><input id="parcela" name="parcela" inputmode="decimal" placeholder="R$ 0,00" maxlength="18"></div><div class="field"><label for="instituicao">Banco ou financeira <small>(opcional)</small></label><input id="instituicao" name="instituicao" placeholder="Nome da instituição" maxlength="100"></div></div>
         <div class="field"><label for="mensagem">O que preocupa você no contrato? <small>(opcional)</small></label><textarea id="mensagem" name="mensagem" rows="3" placeholder="Ex.: a parcela apertou meu orçamento ou há um seguro que não reconheço." maxlength="800"></textarea></div>
         <label class="consent"><input type="checkbox" id="consentimento" name="consentimento" required><span>Concordo em compartilhar estes dados com a Dínamo pelo WhatsApp para atendimento. <button type="button" class="privacy-trigger">Privacidade</button></span></label>
-        <button type="submit" class="button button-green"><i data-lucide="message-circle"></i> Continuar no WhatsApp</button><p class="form-explainer">Você confirma o envio da mensagem no WhatsApp.</p><p id="form-status" class="form-status" role="status" aria-live="polite" hidden></p><a id="form-fallback" class="form-fallback" href="https://wa.me/5511970182723" target="_blank" rel="noopener noreferrer" hidden>Abrir minha mensagem no WhatsApp</a>
+        <button type="submit" class="button button-green whatsapp-cta"><i data-lucide="message-circle" aria-hidden="true"></i><span>Continuar no WhatsApp</span><i data-lucide="arrow-up-right" aria-hidden="true"></i></button><p class="form-explainer">Você confirma o envio da mensagem no WhatsApp.</p><p id="form-status" class="form-status" role="status" aria-live="polite" hidden></p><a id="form-fallback" class="form-fallback" href="https://wa.me/5511970182723" target="_blank" rel="noopener noreferrer" hidden>Abrir minha mensagem no WhatsApp</a>
       </form>
     </div></section>
   </main>

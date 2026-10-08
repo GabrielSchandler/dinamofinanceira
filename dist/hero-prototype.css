@@ -18,6 +18,9 @@
 .hero-prototype .hero__canvas{display:none}
 .webgl .hero-prototype .hero__canvas{display:block}
 .webgl .hero-prototype .hero__fallback{display:none}
+.hero-pending .hero-prototype .hero__fallback{visibility:hidden}
+.hero-pending .hero-prototype .hero__canvas{display:block;visibility:hidden}
+.hero-pending .site-header{background:transparent}
 .hero-prototype .hero__copy{position:relative;z-index:2;width:min(46vw,640px);max-width:none;margin:0 0 0 var(--prototype-gutter);padding:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.55}
 .hero-prototype .hero__copy>*{animation:none}
 .hero-prototype .eyebrow{margin:0;display:block;font-size:.78rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--prototype-gold);line-height:1.55}

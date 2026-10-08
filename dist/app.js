@@ -1,5 +1,5 @@
 'use strict';
-import('./hero-scene.js').catch(() => document.documentElement.classList.remove('webgl', 'motion'));
+import('./hero-scene.js').catch(() => document.documentElement.classList.remove('webgl', 'motion', 'hero-pending'));
 if (window.lucide) window.lucide.createIcons();
 const menuButton = document.querySelector('.menu-button');
 const mobileNav = document.querySelector('.mobile-nav');

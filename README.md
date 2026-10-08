@@ -11,10 +11,12 @@ Execute `node preview.mjs` e abra o endereço impresso no terminal. A porta é e
 - Desktop: barras, seta e faixa em Three.js, com separação e recomposição ligadas ao scroll por GSAP ScrollTrigger. Os textos e os botões continuam em HTML.
 - Celular em orientação vertical: a mesma cena 3D, com o movimento original reduzido e posicionada abaixo dos textos.
 - Preferência por movimento reduzido: cena estática. Sem WebGL: imagem alternativa.
-- A renderização 3D pausa quando o topo sai da tela ou a aba fica oculta.
+- A renderização 3D pausa quando o topo sai da tela ou a aba fica oculta; a iluminação ambiente é atualizada em até 30 quadros por segundo. Alterações de scroll continuam solicitando renderização imediatamente.
 - O palco usa o mesmo posicionamento sticky do protótipo: 40vh extras no desktop e 32vh no celular. A timeline mantém as distâncias originais de 60% e 52% da altura da tela. Ao rolar para cima, as peças se recompõem.
-- Montagem inicial e deslocamento das peças seguem o protótipo. A versão atual da cena acrescenta sombras reais, reflexos de um estúdio de luz quente, brilho (bloom) nas arestas e parede/piso desenhados no próprio canvas, que passou a ser opaco.
-- `dist/hero-scene.js` é o `main.js` do protótipo na versão com iluminação e sombras melhoradas; os módulos de pós-processamento do Three.js ficam em `dist/vendor/jsm/`. A folha `dist/hero-prototype.css` isola a apresentação original do topo; mantém o fundo grafite e os textos e contatos da Dínamo.
+- Montagem inicial e deslocamento das peças seguem o protótipo. A seta tem extrusão e chanfros; as barras combinam faces de pedra com molduras metálicas, e as três faixas têm espessura e torção. Os materiais usam texturas procedurais de pedra e metal escovado, sombras e um ambiente de estúdio.
+- O piso usa reflexão planar real com o Reflector oficial do Three.js r186, suavizada por mipmaps e modulada pela textura da pedra. A resolução do reflexo é limitada a 512 pixels no celular e 1024 no desktop.
+- Durante a inicialização, apenas o fundo grafite aparece atrás do texto. O canvas é exibido depois do primeiro quadro renderizado, evitando a troca visível entre a imagem e as peças. A imagem permanece disponível sem JavaScript/WebGL, em falhas de carregamento ou perda do contexto gráfico; uma espera máxima de 12 segundos também libera a imagem alternativa.
+- `dist/hero-scene.js` contém geometria, iluminação, composição e animação; `dist/hero-surfaces.js` concentra materiais, texturas e reflexo. Os módulos oficiais do Three.js ficam em `dist/vendor/jsm/`. A folha `dist/hero-prototype.css` isola a apresentação do topo e preserva os textos e contatos da Dínamo.
 
 ## Atendimento
 

@@ -12,7 +12,7 @@ window.addEventListener('resize', () => { if (window.innerWidth > 850) closeMenu
 const whatsappNumber = '5511970182723';
 const whatsappUrl = text => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 document.querySelectorAll('.whatsapp-link').forEach(link => {
-  link.href = whatsappUrl('Olá! Gostaria de conversar com a Dínamo sobre a revisão de juros do meu contrato.');
+  link.href = whatsappUrl(link.dataset.whatsappMessage || 'Olá! Quero saber se é possível reduzir as parcelas do meu contrato. Como funciona a análise da Dínamo?');
 });
 
 const form = document.querySelector('#analysis-form');
@@ -53,7 +53,7 @@ form.addEventListener('submit', event => {
   if (!form.reportValidity()) return;
   const data = new FormData(form);
   const lines = [
-    'Olá! Gostaria de solicitar uma análise de contrato com a Dínamo Consultoria Financeira.',
+    'Olá, Dínamo! Quero analisar meu contrato e entender se há possibilidades de reduzir as parcelas ou revisar cobranças.',
     '',
     `Nome: ${String(data.get('nome')).trim()}`,
     `WhatsApp: ${String(data.get('telefone')).trim()}`,

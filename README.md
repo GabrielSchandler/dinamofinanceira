@@ -13,8 +13,8 @@ Execute `node preview.mjs` e abra o endereço impresso no terminal. A porta é e
 - Preferência por movimento reduzido: cena estática. Sem WebGL: imagem alternativa.
 - A renderização 3D pausa quando o topo sai da tela ou a aba fica oculta.
 - O palco usa o mesmo posicionamento sticky do protótipo: 40vh extras no desktop e 32vh no celular. A timeline mantém as distâncias originais de 60% e 52% da altura da tela. Ao rolar para cima, as peças se recompõem.
-- Materiais, iluminação, reflexos, montagem inicial e deslocamento das peças preservam os valores do protótipo original do Claude.
-- `dist/hero-scene.js` copia integralmente o `main.js` original fornecido pelo usuário, sem alterações na lógica, na geometria ou na animação. A folha `dist/hero-prototype.css` isola a apresentação original do topo; mantém o fundo grafite e os textos e contatos da Dínamo.
+- Montagem inicial e deslocamento das peças seguem o protótipo. A versão atual da cena acrescenta sombras reais, reflexos de um estúdio de luz quente, brilho (bloom) nas arestas e parede/piso desenhados no próprio canvas, que passou a ser opaco.
+- `dist/hero-scene.js` é o `main.js` do protótipo na versão com iluminação e sombras melhoradas; os módulos de pós-processamento do Three.js ficam em `dist/vendor/jsm/`. A folha `dist/hero-prototype.css` isola a apresentação original do topo; mantém o fundo grafite e os textos e contatos da Dínamo.
 
 ## Atendimento
 

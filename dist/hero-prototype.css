@@ -1,5 +1,7 @@
 .site-header,.hero-prototype{--prototype-gutter:clamp(20px,6vw,96px);--prototype-gold:#d8b46a;--prototype-gold-soft:#e9d3a0;--prototype-ink:#f2eadb;--prototype-muted:#b3aa9a;--prototype-hold:40vh}
 .site-header{position:absolute;inset:0 0 auto 0;z-index:3;border:0;background:var(--ink)}
+/* com a cena 3D ativa a parede grafite é desenhada no canvas: o cabeçalho fica transparente para não criar uma faixa de outra cor */
+.webgl .site-header{background:transparent}
 .site-header .header-inner{width:100%;max-width:none;height:auto;margin:0;padding:26px var(--prototype-gutter);gap:28px}
 .site-header .brand{gap:12px;color:var(--prototype-ink)}
 .site-header .brand__mark{width:22px;height:22px;border-radius:50%;background:conic-gradient(from 210deg,#8a6a35,#ecd08d,#8a6a35);flex-shrink:0}

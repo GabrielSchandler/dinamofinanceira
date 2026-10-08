@@ -5,7 +5,7 @@
   border-bottom: 1px solid #32413a;
   color: #f3efe5;
 }
-.strip-inner { min-height: 90px; }
+.strip-inner { min-height: 90px; grid-template-columns: repeat(4,minmax(0,1fr)); }
 .strip-inner span { font-size: 13px; font-weight: 600; }
 .strip-inner span + span { border-left-color: #ffffff2a; }
 .strip-inner svg { stroke: #dabd7f; width: 25px; height: 25px; }
@@ -13,9 +13,9 @@
 .solutions { padding-block: 112px 105px; background: #f6f8f6; }
 .solutions .section-intro { margin-bottom: 58px; }
 .solutions .intro-description { max-width: 390px; }
-.solutions .services-grid { gap: 18px; align-items: stretch; }
+.solutions .services-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; align-items: stretch; }
 .solutions .service-card {
-  min-height: 555px;
+  min-height: 475px;
   padding: 34px 30px 0;
   background: #fff;
   border: 1px solid #cdd6d0;
@@ -187,6 +187,12 @@
 .site-footer .brand-symbol { width: 69px; height: 53px; object-fit: contain; flex: 0 0 auto; }
 .site-footer .brand strong { color: #f1dfb4; }
 .site-footer .brand small { color: #dabb78; }
+.site-footer nav { flex-wrap: wrap; align-items: center; }
+.footer-instagram, .contact-instagram { display: inline-flex; align-items: center; gap: 9px; }
+.footer-instagram img { width: 16px; height: 16px; }
+.contact-instagram { color: #e4e9e3; font-size: 13px; font-weight: 600; }
+.contact-instagram:hover { color: #e6c688; }
+.contact-instagram img { width: 18px; height: 18px; }
 
 @media (hover: hover) and (pointer: fine) {
   .faq-list summary:hover > svg { transform: rotate(90deg); }
@@ -200,6 +206,9 @@
   .contact-grid { gap: 65px; }
 }
 @media (max-width: 850px) {
+  .strip-inner { grid-template-columns: repeat(2,minmax(0,1fr)); padding-block: 12px; }
+  .strip-inner span:nth-child(3) { border-left: 0; }
+  .solutions .services-grid { grid-template-columns: 1fr; }
   .solutions, .process-section, .about-section, .faq-section, .contact-section { padding-block: 78px; }
   .solutions .service-card { min-height: 0; }
   .solutions .service-card h3 { font-size: 32px; }
@@ -210,7 +219,8 @@
   .brand-art-media img { aspect-ratio: 1456 / 1086; }
 }
 @media (max-width: 600px) {
-  .strip-inner { padding-block: 10px; }
+  .strip-inner { grid-template-columns: 1fr; padding-block: 10px; }
+  .strip-inner span + span { border-left: 0; }
   .strip-inner span { font-size: 12px; padding-block: 8px; }
   .strip-inner svg { width: 20px; height: 20px; }
   .solutions, .process-section, .about-section, .faq-section, .contact-section { padding-block: 64px; }
@@ -265,6 +275,7 @@
   .services-grid .service-card:nth-child(3),
   .process-grid li:nth-child(3),
   .perspective-items > div:nth-child(3) { transition-delay: .2s; }
+  .services-grid .service-card:nth-child(4),
   .process-grid li:nth-child(4) { transition-delay: .3s; }
   .reveal-ready .brand-art.visible .brand-art-media img { transform: translateY(var(--photo-y,0px)) scale(1.025); }
   .reveal-ready .solutions .service-card.visible:hover,

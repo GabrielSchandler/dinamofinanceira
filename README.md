@@ -27,7 +27,10 @@ Execute `node preview.mjs` e abra o endereço impresso no terminal. A porta é e
 ## Atendimento
 
 - WhatsApp: (11) 97018-2723.
+- Instagram: https://www.instagram.com/consultoriadinamo/.
 - E-mail: dinamoconsultoriafinanceira@gmail.com.
+- A análise do contrato é gratuita. Eventuais serviços posteriores devem ter valores e condições explicados antes da contratação.
+- Modalidades: financiamento de veículos, imóveis e energia solar, além de empréstimos PF e PJ.
 - O formulário não envia mensagens automaticamente: o visitante confirma o envio no WhatsApp.
 - O formulário não grava os dados em banco de dados próprio ou no armazenamento do navegador.
 - Não há analytics ou pixels configurados. As fontes usam Google Fonts, com alternativas locais.
@@ -41,5 +44,6 @@ CNPJ, endereço, condições comerciais e eventuais depoimentos verificados deve
 - Logo original fornecido pelo usuário, preservado em `brand-original.png`.
 - Imagens de identidade, atendimento e textura fornecidas pelo usuário. A nova cena de atendimento foi comprimida para WebP sem alterar sua composição; está identificada como ilustrativa e não é apresentada como fotografia da equipe ou da sede real.
 - Ícones: Lucide (licença ISC). Biblioteca preservada localmente, incluindo seu aviso de licença.
+- Logotipos do WhatsApp e Instagram: Simple Icons, armazenados localmente em SVG.
 - Three.js: licença MIT em `dist/vendor/three-LICENSE.txt`. GSAP e ScrollTrigger: avisos e endereço da licença preservados nos cabeçalhos das bibliotecas.
 - Referências de estrutura fornecidas pelo usuário: https://www.grssolucao.com.br/ e https://www.atlasnegociacoes.com.br/. Texto e identidade desta versão foram escritos para a Dínamo.

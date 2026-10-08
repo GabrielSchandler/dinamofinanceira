@@ -18,6 +18,12 @@ Execute `node preview.mjs` e abra o endereço impresso no terminal. A porta é e
 - Durante a inicialização, apenas o fundo grafite aparece atrás do texto. O canvas é exibido depois do primeiro quadro renderizado, evitando a troca visível entre a imagem e as peças. A imagem permanece disponível sem JavaScript/WebGL, em falhas de carregamento ou perda do contexto gráfico; uma espera máxima de 12 segundos também libera a imagem alternativa.
 - `dist/hero-scene.js` contém geometria, iluminação, composição e animação; `dist/hero-surfaces.js` concentra materiais, texturas e reflexo. Os módulos oficiais do Three.js ficam em `dist/vendor/jsm/`. A folha `dist/hero-prototype.css` isola a apresentação do topo e preserva os textos e contatos da Dínamo.
 
+## Seções abaixo do topo
+
+- `dist/lower-page.css` dá às soluções, ao processo, ao atendimento e às dúvidas uma sequência visual própria, com faixas claras e escuras, mantendo o foco no WhatsApp e no formulário.
+- Com movimento permitido, os elementos entram de forma escalonada; a linha do processo acompanha a rolagem e a foto de atendimento se desloca discretamente. Com movimento reduzido, todo o conteúdo permanece visível e a linha aparece completa.
+- A foto de atendimento é a versão ilustrativa mais natural fornecida pelo usuário, servida em WebP e carregada apenas quando necessária. A textura de identidade fornecida pelo usuário também aparece na faixa sobre o contrato.
+
 ## Atendimento
 
 - WhatsApp: (11) 97018-2723.
@@ -33,7 +39,7 @@ CNPJ, endereço, condições comerciais e eventuais depoimentos verificados deve
 ## Imagens e referências
 
 - Logo original fornecido pelo usuário, preservado em `brand-original.png`.
-- Imagens de identidade, atendimento e textura fornecidas pelo usuário, preservadas sem alteração de conteúdo. A cena de atendimento está identificada como ilustrativa e não é apresentada como fotografia da equipe ou da sede real.
+- Imagens de identidade, atendimento e textura fornecidas pelo usuário. A nova cena de atendimento foi comprimida para WebP sem alterar sua composição; está identificada como ilustrativa e não é apresentada como fotografia da equipe ou da sede real.
 - Ícones: Lucide (licença ISC). Biblioteca preservada localmente, incluindo seu aviso de licença.
 - Three.js: licença MIT em `dist/vendor/three-LICENSE.txt`. GSAP e ScrollTrigger: avisos e endereço da licença preservados nos cabeçalhos das bibliotecas.
 - Referências de estrutura fornecidas pelo usuário: https://www.grssolucao.com.br/ e https://www.atlasnegociacoes.com.br/. Texto e identidade desta versão foram escritos para a Dínamo.

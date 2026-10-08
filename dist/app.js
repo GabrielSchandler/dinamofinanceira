@@ -92,9 +92,36 @@ document.querySelector('#year').textContent = new Date().getFullYear();
 if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); } });
-  }, { threshold: .06, rootMargin: '0px 0px -15px 0px' });
+  }, { threshold: .06, rootMargin: '0px 0px -8% 0px' });
   document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
+  document.querySelectorAll('.strip-inner span, .perspective-items > div, .faq-list details').forEach(element => {
+    element.classList.add('scroll-reveal');
+    revealObserver.observe(element);
+  });
   document.body.classList.add('reveal-ready');
+}
+
+const processGrid = document.querySelector('.process-grid');
+if (window.gsap && window.ScrollTrigger && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const { gsap, ScrollTrigger } = window;
+  gsap.registerPlugin(ScrollTrigger);
+  const progress = { value: 0 };
+  gsap.to(progress, {
+    value: 1,
+    ease: 'none',
+    onUpdate: () => processGrid.style.setProperty('--process-progress', progress.value.toFixed(3)),
+    scrollTrigger: { trigger: processGrid, start: 'top 80%', end: 'bottom 35%', scrub: .45 },
+  });
+  const art = document.querySelector('.brand-art');
+  const photo = { y: -14 };
+  gsap.to(photo, {
+    y: 14,
+    ease: 'none',
+    onUpdate: () => art.style.setProperty('--photo-y', `${photo.y.toFixed(1)}px`),
+    scrollTrigger: { trigger: art, start: 'top bottom', end: 'bottom top', scrub: .8 },
+  });
+} else {
+  processGrid.style.setProperty('--process-progress', '1');
 }
 
 if ('IntersectionObserver' in window) {

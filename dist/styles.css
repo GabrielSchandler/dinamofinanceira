@@ -52,6 +52,8 @@ h2{line-height:1.15}
 .form-subtitle{font-size:1rem;font-weight:500;line-height:1.75}
 .segmented-control span{font-size:.875rem}
 .consent,.form-explainer,.form-status,.form-fallback{font-size:.875rem;line-height:1.8}
+.consent{cursor:default}
+.consent label{cursor:pointer}
 .button-green{font-size:.9375rem;line-height:1.65}
 .privacy-dialog p:not(.eyebrow){font-size:1rem;line-height:1.85}
 .privacy-dialog .privacy-fine{font-size:.875rem}

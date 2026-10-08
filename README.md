@@ -35,6 +35,13 @@ Execute `node preview.mjs` e abra o endereço impresso no terminal. A porta é e
 - O formulário não grava os dados em banco de dados próprio ou no armazenamento do navegador.
 - Não há analytics ou pixels configurados. As fontes usam Google Fonts, com alternativas locais.
 
+## SEO e compartilhamento
+
+- A URL canônica atual é `https://dinamofinanceira.vercel.app/`. Atualize-a nos metadados, no JSON-LD, em `dist/robots.txt` e em `dist/sitemap.xml` quando houver domínio próprio.
+- O sitemap lista apenas a home canônica. O JSON-LD usa somente nome e contatos fornecidos pela empresa, sem CNPJ ou endereço presumidos.
+- A imagem Open Graph (`dist/assets/og-dinamo.jpg`) usa a identidade visual da página em 1200 x 630. A imagem de reserva do hero é servida em WebP, mantendo a cena 3D inalterada.
+- Existe um segundo projeto público da Vercel (`dinamofinanceira-dist`). A tag canonical publicada nele também aponta para a URL acima. Antes de remover ou redirecionar esse projeto, confirme se ele é usado por algum fluxo externo.
+
 ## Informações pendentes
 
 CNPJ, endereço, condições comerciais e eventuais depoimentos verificados devem ser fornecidos pela empresa antes de uma divulgação pública definitiva. Não foram inventados números de atendimento, resultados, clientes ou avaliações.

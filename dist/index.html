@@ -10,14 +10,29 @@
   </script>
   <title>Dínamo | Análise Gratuita de Financiamentos e Empréstimos</title>
   <meta name="description" content="Análise gratuita de contratos de veículos, imóveis, energia solar e empréstimos. Converse com a Dínamo sobre juros, tarifas e seguros pelo WhatsApp.">
+  <link rel="canonical" href="https://dinamofinanceira.vercel.app/">
   <meta property="og:title" content="Dínamo Consultoria Financeira">
   <meta property="og:description" content="Revisão de juros em financiamentos e empréstimos. Solicite uma análise gratuita do seu contrato pelo WhatsApp.">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Dínamo Consultoria Financeira">
+  <meta property="og:url" content="https://dinamofinanceira.vercel.app/">
+  <meta property="og:image" content="https://dinamofinanceira.vercel.app/assets/og-dinamo.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Identidade visual da Dínamo com gráfico dourado sobre fundo grafite">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dínamo | Análise Gratuita de Financiamentos e Empréstimos">
+  <meta name="twitter:description" content="Análise gratuita de contratos de veículos, imóveis, energia solar e empréstimos. Converse com a Dínamo pelo WhatsApp.">
+  <meta name="twitter:image" content="https://dinamofinanceira.vercel.app/assets/og-dinamo.jpg">
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Organization","name":"Dínamo Consultoria Financeira","url":"https://dinamofinanceira.vercel.app/","logo":"https://dinamofinanceira.vercel.app/assets/dinamo-wordmark.webp","telephone":"+55 11 97018-2723","email":"dinamoconsultoriafinanceira@gmail.com","sameAs":["https://www.instagram.com/consultoriadinamo/"]}
+  </script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23171b19'/%3E%3Cpath d='M8 23V9h6c10 0 10 14 0 14Z' fill='none' stroke='%23dfbd79' stroke-width='3'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" href="assets/dinamo-hero.png" as="image">
+  <link rel="preload" href="assets/dinamo-hero.webp" as="image">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="hero-prototype.css">
   <link rel="stylesheet" href="header-contact.css">
@@ -49,7 +64,7 @@
   <main id="principal">
     <section class="hero hero-prototype" aria-labelledby="hero-title">
       <div class="hero__stage">
-      <img class="hero-photo hero__fallback" src="assets/dinamo-hero.png" alt="Gráfico e seta dourados da identidade Dínamo sobre fundo grafite" width="1672" height="941" fetchpriority="high">
+      <img class="hero-photo hero__fallback" src="assets/dinamo-hero.webp" alt="Gráfico e seta dourados da identidade Dínamo sobre fundo grafite" width="1672" height="941" fetchpriority="high">
       <canvas class="hero-canvas hero__canvas" aria-hidden="true"></canvas>
       <div class="hero-content hero__copy">
         <p class="eyebrow">ANÁLISE GRATUITA DO SEU CONTRATO</p>
@@ -96,7 +111,7 @@
         <div class="form-row"><div class="field"><label for="telefone">Seu WhatsApp <span aria-hidden="true">*</span></label><input id="telefone" name="telefone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999" required maxlength="15"></div><div class="field"><label for="contrato">Tipo de contrato <span aria-hidden="true">*</span></label><select id="contrato" name="contrato" required><option value="">Selecione</option><option value="Veículo">Veículo</option><option value="Imóvel">Imóvel</option><option value="Energia solar">Energia solar</option><option value="Empréstimo">Empréstimo</option></select></div></div>
         <div class="form-row"><div class="field"><label for="parcela">Valor da parcela <small>(opcional)</small></label><input id="parcela" name="parcela" inputmode="decimal" placeholder="R$ 0,00" maxlength="18"></div><div class="field"><label for="instituicao">Banco ou financeira <small>(opcional)</small></label><input id="instituicao" name="instituicao" placeholder="Nome da instituição" maxlength="100"></div></div>
         <div class="field"><label for="mensagem">O que preocupa você no contrato? <small>(opcional)</small></label><textarea id="mensagem" name="mensagem" rows="3" placeholder="Ex.: a parcela apertou meu orçamento ou há um seguro que não reconheço." maxlength="800"></textarea></div>
-        <label class="consent"><input type="checkbox" id="consentimento" name="consentimento" required><span>Concordo em compartilhar estes dados com a Dínamo pelo WhatsApp para atendimento. <button type="button" class="privacy-trigger">Privacidade</button></span></label>
+        <div class="consent"><input type="checkbox" id="consentimento" name="consentimento" required><div><label for="consentimento">Concordo em compartilhar estes dados com a Dínamo pelo WhatsApp para atendimento.</label> <button type="button" class="privacy-trigger">Privacidade</button></div></div>
         <button type="submit" class="button button-green whatsapp-cta"><img class="whatsapp-icon" src="assets/whatsapp.svg" alt="" aria-hidden="true"><span>Pedir análise gratuita</span><i data-lucide="arrow-up-right" aria-hidden="true"></i></button><p class="form-explainer">Você confirma o envio da mensagem no WhatsApp.</p><p id="form-status" class="form-status" role="status" aria-live="polite" hidden></p><a id="form-fallback" class="form-fallback" href="https://wa.me/5511970182723" target="_blank" rel="noopener noreferrer" hidden>Abrir minha mensagem no WhatsApp</a>
       </form>
     </div></section>

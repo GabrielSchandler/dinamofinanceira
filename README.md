@@ -42,6 +42,7 @@ CNPJ, endereço, condições comerciais e eventuais depoimentos verificados deve
 ## Imagens e referências
 
 - Logo original fornecido pelo usuário, preservado em `brand-original.png`.
+- A assinatura dourada usada no cabeçalho e rodapé foi derivada da imagem original com fundo transparente e otimizada em `dist/assets/dinamo-wordmark.webp` (1200 x 400, 132 KB). A imagem original continua preservada; para reprodução absolutamente fiel em outros suportes, solicite o arquivo vetorial da marca.
 - Imagens de identidade, atendimento e textura fornecidas pelo usuário. A nova cena de atendimento foi comprimida para WebP sem alterar sua composição; está identificada como ilustrativa e não é apresentada como fotografia da equipe ou da sede real.
 - Ícones: Lucide (licença ISC). Biblioteca preservada localmente, incluindo seu aviso de licença.
 - Logotipos do WhatsApp e Instagram: Simple Icons, armazenados localmente em SVG.

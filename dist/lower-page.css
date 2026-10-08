@@ -185,8 +185,6 @@
 .analysis-form h3 { font-size: 34px; }
 .site-footer { border-top: 1px solid #b6935638; }
 .site-footer .brand-symbol { width: 69px; height: 53px; object-fit: contain; flex: 0 0 auto; }
-.site-footer .brand strong { color: #f1dfb4; }
-.site-footer .brand small { color: #dabb78; }
 .site-footer nav { flex-wrap: wrap; align-items: center; }
 .footer-instagram, .contact-instagram { display: inline-flex; align-items: center; gap: 9px; }
 .footer-instagram img { width: 16px; height: 16px; }
@@ -259,6 +257,7 @@
   .contact-copy h2 { font-size: 48px; }
   .analysis-form h3 { font-size: 30px; }
   .site-footer .brand-symbol { width: 57px; height: 45px; }
+  .site-footer .brand-wordmark { width: 180px; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .reveal-ready .reveal,

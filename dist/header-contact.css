@@ -1,8 +1,8 @@
 .site-header{z-index:40}
 .site-header .header-inner{min-height:104px;padding-top:18px;padding-bottom:18px;gap:24px}
-.site-header .brand{gap:10px}
+.site-header .brand{gap:10px;min-width:0;flex-shrink:1}
 .site-header .brand-symbol{width:78px;height:58px;object-fit:contain;flex-shrink:0}
-.site-header .brand-wordmark{width:215px;height:auto;flex:0 1 auto;object-fit:contain}
+.site-header .brand-wordmark{width:215px;height:auto;min-width:0;flex:0 1 auto;object-fit:contain}
 .site-footer .brand-wordmark{width:200px;height:auto;flex:0 1 auto;object-fit:contain}
 .site-header .desktop-nav{margin-left:auto;gap:24px;font-size:14px;color:#f1e9dc}
 .site-header .desktop-nav a{padding:10px 0;border-bottom:1px solid transparent}
@@ -38,7 +38,7 @@
   .site-header .menu-button .menu-close{display:none}
   .menu-open .site-header .menu-icon{display:none}
   .menu-open .site-header .menu-close{display:block}
-  .site-header .mobile-nav{display:flex;position:absolute;inset:100% 0 auto;flex-direction:column;gap:0;padding:12px var(--prototype-gutter) 24px;background:#111b16;border-top:1px solid #e4c88633;box-shadow:0 18px 30px #0006;max-height:calc(100svh - 88px);overflow-y:auto;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  .site-header .mobile-nav{display:flex;position:absolute;inset:100% 0 auto;flex-direction:column;gap:0;padding:12px var(--prototype-gutter) 24px;background:#111b16;border-top:1px solid #e4c88633;box-shadow:0 18px 30px #0006;max-height:calc(100svh - var(--site-header-height,88px));overflow-y:auto;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
   .site-header .mobile-nav[hidden]{display:none}
   .site-header .mobile-nav>a{padding:13px 0;color:#f1e9dc;font-size:16px;border-bottom:1px solid #ffffff15}
   .site-header .mobile-nav>a.whatsapp-cta{padding:15px 18px;margin-top:18px;border:1px solid #50b983;color:#fff}
@@ -47,7 +47,6 @@
   .site-header .header-inner{min-height:82px;padding:10px var(--prototype-gutter);gap:12px}
   .site-header .brand-symbol{width:64px;height:50px}
   .site-header .brand-wordmark{width:180px}
-  .hero-prototype .hero__copy{padding-top:104px}
   .hero-prototype .hero-actions{gap:16px;width:100%}
   .hero-prototype .button.whatsapp-cta{width:100%;min-height:56px;padding:15px 18px;font-size:16px;justify-content:space-between}
   .hero-prototype .hero-actions .text-link{font-size:14px}
@@ -59,7 +58,6 @@
   .site-header .header-inner{min-height:64px;padding-top:6px;padding-bottom:6px}
   .site-header .brand-symbol{height:42px;width:56px}
   .hero-prototype .button.whatsapp-cta{min-height:46px;padding:10px 16px;font-size:14px}
-  .site-header .mobile-nav{max-height:calc(100svh - 64px)}
 }
 @media(max-width:360px){
   .site-header .brand-symbol{width:50px;height:43px}

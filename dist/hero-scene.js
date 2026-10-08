@@ -381,6 +381,7 @@ function start() {
   }).observe(stage);
   document.addEventListener('visibilitychange', requestRender);
   window.addEventListener('resize', layout);
+  if ('ResizeObserver' in window) new ResizeObserver(layout).observe(stage);
   window.addEventListener('pointermove', (e) => {
     if (!mqPointer.matches) return;
     pointer.tx = (e.clientX / window.innerWidth) * 2 - 1;

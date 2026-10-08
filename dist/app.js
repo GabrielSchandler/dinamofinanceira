@@ -1,4 +1,20 @@
 'use strict';
+const hero = document.querySelector('.hero-prototype');
+const heroStage = hero.querySelector('.hero__stage');
+const siteHeader = document.querySelector('.site-header');
+function syncHeroLayout() {
+  const headerHeight = `${Math.ceil(siteHeader.offsetHeight)}px`;
+  const rootStyle = document.documentElement.style;
+  if (rootStyle.getPropertyValue('--site-header-height') !== headerHeight) rootStyle.setProperty('--site-header-height', headerHeight);
+  hero.classList.toggle('hero-flow', heroStage.offsetHeight > window.innerHeight + 1);
+}
+syncHeroLayout();
+if ('ResizeObserver' in window) {
+  const heroLayoutObserver = new ResizeObserver(syncHeroLayout);
+  heroLayoutObserver.observe(siteHeader);
+  heroLayoutObserver.observe(heroStage);
+}
+window.addEventListener('resize', syncHeroLayout);
 import('./hero-scene.js').catch(() => document.documentElement.classList.remove('webgl', 'motion', 'hero-pending'));
 if (window.lucide) window.lucide.createIcons();
 const menuButton = document.querySelector('.menu-button');

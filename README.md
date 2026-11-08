@@ -1,12 +1,23 @@
-# Dínamo Consultoria Financeira
+# Dínamo Consultoria Financeira — Site
+
+Landing page da Dínamo, consultoria que faz análise gratuita de financiamentos e empréstimos.
+Landing page for Dínamo, a consultancy offering free reviews of loans and financing contracts.
+
+🌐 **No ar / Live:** [dinamofinanceira.vercel.app](https://dinamofinanceira.vercel.app)
+
+[🇧🇷 Português](#-português) · [🇺🇸 English](#-english)
+
+---
+
+## 🇧🇷 Português
 
 Landing page em português, com layout responsivo, cena 3D controlada pela rolagem, menu mobile, dúvidas expansíveis, política de privacidade e formulário que prepara uma mensagem no WhatsApp.
 
-## Abrir localmente
+### Abrir localmente
 
 Execute `node preview.mjs` e abra o endereço impresso no terminal. A porta é escolhida automaticamente. Não há dependências a instalar: as bibliotecas estão em `dist/vendor/`. Um servidor HTTP é necessário para carregar os módulos da cena 3D.
 
-## Animação do topo
+### Animação do topo
 
 - Desktop: barras, seta e faixa em Three.js, com separação e recomposição ligadas ao scroll por GSAP ScrollTrigger. Os textos e os botões continuam em HTML.
 - Celular em orientação vertical: a mesma cena 3D, com o movimento original reduzido e posicionada abaixo dos textos.
@@ -19,13 +30,13 @@ Execute `node preview.mjs` e abra o endereço impresso no terminal. A porta é e
 - Durante a inicialização, apenas o fundo grafite aparece atrás do texto. O canvas é exibido depois do primeiro quadro renderizado, evitando a troca visível entre a imagem e as peças. A imagem permanece disponível sem JavaScript/WebGL, em falhas de carregamento ou perda do contexto gráfico; uma espera máxima de 12 segundos também libera a imagem alternativa.
 - `dist/hero-scene.js` contém geometria, iluminação, composição e animação; `dist/hero-surfaces.js` concentra materiais, texturas e reflexo. Os módulos oficiais do Three.js ficam em `dist/vendor/jsm/`. A folha `dist/hero-prototype.css` isola a apresentação do topo e preserva os textos e contatos da Dínamo.
 
-## Seções abaixo do topo
+### Seções abaixo do topo
 
 - `dist/lower-page.css` dá às soluções, ao processo, ao atendimento e às dúvidas uma sequência visual própria, com faixas claras e escuras, mantendo o foco no WhatsApp e no formulário.
 - Com movimento permitido, os elementos entram de forma escalonada; a linha do processo acompanha a rolagem e a foto de atendimento se desloca discretamente. Com movimento reduzido, todo o conteúdo permanece visível e a linha aparece completa.
 - A foto de atendimento é a versão ilustrativa mais natural fornecida pelo usuário, servida em WebP e carregada apenas quando necessária. A textura de identidade fornecida pelo usuário também aparece na faixa sobre o contrato.
 
-## Atendimento
+### Atendimento
 
 - WhatsApp: (11) 97018-2723.
 - Instagram: https://www.instagram.com/consultoriadinamo/.
@@ -36,18 +47,18 @@ Execute `node preview.mjs` e abra o endereço impresso no terminal. A porta é e
 - O formulário não grava os dados em banco de dados próprio ou no armazenamento do navegador.
 - Não há analytics ou pixels configurados. As fontes usam Google Fonts, com alternativas locais.
 
-## SEO e compartilhamento
+### SEO e compartilhamento
 
 - A URL canônica atual é `https://dinamofinanceira.vercel.app/`. Atualize-a nos metadados, no JSON-LD, em `dist/robots.txt` e em `dist/sitemap.xml` quando houver domínio próprio.
 - O sitemap lista apenas a home canônica. O JSON-LD usa somente nome e contatos fornecidos pela empresa, sem CNPJ ou endereço presumidos.
 - A imagem Open Graph (`dist/assets/og-dinamo.jpg`) usa a identidade visual da página em 1200 x 630. A imagem de reserva do hero é servida em WebP, mantendo a cena 3D inalterada.
 - Existe um segundo projeto público da Vercel (`dinamofinanceira-dist`). A tag canonical publicada nele também aponta para a URL acima. Antes de remover ou redirecionar esse projeto, confirme se ele é usado por algum fluxo externo.
 
-## Informações pendentes
+### Informações pendentes
 
 CNPJ, endereço, condições comerciais e eventuais depoimentos verificados devem ser fornecidos pela empresa antes de uma divulgação pública definitiva. Não foram inventados números de atendimento, resultados, clientes ou avaliações.
 
-## Imagens e referências
+### Imagens e referências
 
 - Logo original fornecido pelo usuário, preservado em `brand-original.png`.
 - A assinatura dourada usada no cabeçalho e rodapé foi derivada da imagem original com fundo transparente e otimizada em `dist/assets/dinamo-wordmark.webp` (1200 x 400, 132 KB). A imagem original continua preservada; para reprodução absolutamente fiel em outros suportes, solicite o arquivo vetorial da marca.
@@ -56,3 +67,37 @@ CNPJ, endereço, condições comerciais e eventuais depoimentos verificados deve
 - Logotipos do WhatsApp e Instagram: Simple Icons, armazenados localmente em SVG.
 - Three.js: licença MIT em `dist/vendor/three-LICENSE.txt`. GSAP e ScrollTrigger: avisos e endereço da licença preservados nos cabeçalhos das bibliotecas.
 - Referências de estrutura fornecidas pelo usuário: https://www.grssolucao.com.br/ e https://www.atlasnegociacoes.com.br/. Texto e identidade desta versão foram escritos para a Dínamo.
+
+---
+
+## 🇺🇸 English
+
+A Portuguese-language landing page with a responsive layout, a scroll-driven 3D hero scene, mobile menu, expandable FAQ, privacy policy, and a form that prepares a WhatsApp message.
+
+### Running locally
+
+Run `node preview.mjs` and open the address printed in the terminal (the port is picked automatically). There is nothing to install: the libraries live in `dist/vendor/`. An HTTP server is required to load the 3D scene's ES modules.
+
+### Hero animation
+
+- **Desktop:** bars, an arrow and ribbons built in Three.js, which separate and recompose on scroll via GSAP ScrollTrigger. Text and buttons stay in HTML.
+- **Mobile (portrait):** the same 3D scene with reduced motion, placed below the text.
+- **Reduced-motion preference:** static scene. **No WebGL:** a fallback image.
+- Rendering pauses when the hero leaves the viewport or the tab is hidden. Materials use procedural stone and brushed-metal textures, real planar reflections (Three.js `Reflector`), shadows and a studio environment.
+- `dist/hero-scene.js` holds geometry, lighting, composition and animation; `dist/hero-surfaces.js` holds materials, textures and reflections.
+
+### Below the hero
+
+`dist/lower-page.css` styles the solutions, process, service and FAQ sections, with staggered reveal animations (disabled under reduced motion).
+
+### Privacy
+
+The form does not send messages automatically (the visitor confirms in WhatsApp) and stores no data, either in a database or in the browser. No analytics or tracking pixels are configured.
+
+### SEO
+
+The canonical URL is `https://dinamofinanceira.vercel.app/`. Update it in the metadata, the JSON-LD, `dist/robots.txt` and `dist/sitemap.xml` once a custom domain is set up.
+
+### Credits and licenses
+
+Icons: Lucide (ISC). WhatsApp and Instagram logos: Simple Icons. Three.js: MIT (`dist/vendor/three-LICENSE.txt`). GSAP and ScrollTrigger: license notices kept in the library headers.

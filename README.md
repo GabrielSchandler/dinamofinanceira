@@ -7,6 +7,11 @@ Landing page for Dínamo, a consultancy offering free reviews of loans and finan
 
 [🇧🇷 Português](#-português) · [🇺🇸 English](#-english)
 
+<p align="center">
+  <img src="docs/screenshot-desktop.jpg" alt="Página inicial / Home page — desktop" width="76%">
+  <img src="docs/screenshot-mobile.jpg" alt="Página inicial / Home page — mobile" width="20%">
+</p>
+
 ---
 
 ## 🇧🇷 Português
